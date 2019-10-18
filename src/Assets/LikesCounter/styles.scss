@@ -1,0 +1,10 @@
+.likes {
+  margin-right: 15px;
+  font-family: 'Verdana', sans-serif;
+  font-size: 17px;
+  cursor: pointer;
+
+  &__count {
+    font-size: 14px;
+  }
+}
