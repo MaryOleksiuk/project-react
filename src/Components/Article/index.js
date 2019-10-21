@@ -5,25 +5,31 @@ import { CommentsCounter } from '../../Assets/CommentsCounter';
 import { LikesCounter } from '../../Assets/LikesCounter';
 import { Share } from '../../Assets/Share';
 
-export const Article = () => {
+export const Article = (props) => {
+  const date = new Date(props.published).toLocaleDateString();
+
+  const tags = props.tags.map((tag, index) => (
+    <Tag key={ index } source={ tag } />
+  ));
+
   return (
     <section className='article'>
       <div className='article__image'>
+        <img src={ props.image }></img>
         <div className='article__tags'>
-          <Tag />
-          <Tag />
+          { tags }
         </div>
       </div>
       <div className='article__content'>
-        <h3 className='article__title'>What is Lorem Ipsum?</h3>
-        <p className='article__description'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</p>
+        <h3 className='article__title'>{ props.title }</h3>
+        <p className='article__description'>{ props.description }</p>
       </div>
       <div className='article__footer'>
-        <span>15.07.2019</span>
+        <span>{ date }</span>
 
         <div>
-          <CommentsCounter />
-          <LikesCounter />
+          <CommentsCounter counts={ props.comments } />
+          <LikesCounter counts={ props.likes } />
           <Share />
         </div>
       </div>
