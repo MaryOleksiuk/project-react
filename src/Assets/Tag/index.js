@@ -2,10 +2,10 @@ import React from 'react';
 import './styles.scss';
 
 
-export const Tag = () => {
+export const Tag = (props) => {
   return (
     <a className='tag'>
-      literature
+      { props.source }
     </a>
   )
 };

@@ -1,0 +1,41 @@
+[
+	{
+		"id": 1,
+		"title": "Traveling to Ecuador ",
+		"description": "Postcard-pretty colonial centers, waves splashing white-sand beaches, Kichwa villages, Amazonian rainforest and the breathtaking Andes – a dazzling array of beautiful places",
+		"published": "2019-10-15T15:32:45.167Z",
+		"likes": 315,
+		"comments": 10,
+		"image": "https://images.pexels.com/photos/2873419/pexels-photo-2873419.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=853&w=1280",
+		"tags": [
+			"travel",
+			"ecuador"
+		]
+	},
+	{
+		"id": 2,
+		"title": "Welcome to Mexico",
+		"description": "Palm-fringed beaches, chili-spiced cuisine, steamy jungles, teeming cities, fiesta fireworks, Frida’s angst: Mexico conjures up diverse, vivid dreams. And the reality lives up to them.",
+		"published": "2019-10-15T15:32:45.167Z",
+		"likes": 265,
+		"comments": 25,
+		"image": " https://images.pexels.com/photos/461662/pexels-photo-461662.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=853&w=1280",
+		"tags": [
+			"travel",
+			"mexico"
+		]
+	},
+	{
+		"id": 3,
+		"title": "Travel to Brazil",
+		"description": "One of the world's most captivating places, Brazil is a country of powdery white-sand beaches, verdant rainforests and wild, rhythm-filled metropolises and many others ",
+		"published": "2019-10-15T15:32:45.167Z",
+		"likes": 110,
+		"comments": 15,
+		"image": "https://images.pexels.com/photos/2007390/pexels-photo-2007390.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+		"tags": [
+			"travel",
+			"brazil"
+		]
+	}
+]
