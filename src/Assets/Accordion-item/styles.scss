@@ -35,7 +35,7 @@
     }
   }
 
-  &__content {
+  &__panel {
     margin: 0;
     padding: 2% 3%;
 
@@ -43,5 +43,11 @@
     font-size: 14px;
     line-height: 1.3;
     color: #000000;
+
+    display: none;
+
+    &.show {
+      display: block;
+    }
   }
 }
