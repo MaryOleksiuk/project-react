@@ -15,7 +15,7 @@ export const Article = (props) => {
   return (
     <section className='article'>
       <div className='article__image'>
-        <img src={ props.image }></img>
+        <img src={ props.image } alt='test'></img>
         <div className='article__tags'>
           { tags }
         </div>
