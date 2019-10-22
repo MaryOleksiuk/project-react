@@ -4,6 +4,11 @@
   &.active {
     .accordion-item__title {
       color: #4886ff;
+
+      &:after {
+        content: '-';
+        color: #4886ff;
+      }
     }
 
     .accordion-item__panel {
@@ -32,6 +37,10 @@
 
     &:hover {
       color: #000000;
+
+      &::after {
+        color: #000000;
+      }
     }
     
     &::after {

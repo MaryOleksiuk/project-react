@@ -8,7 +8,7 @@ export const Accordion = (props) => {
   const accordionItems = source.map((accordionItem, index) => (
     <AccordionItem
       key={index}
-      data-index={index}
+      index={index}
       question={accordionItem.question}
       answer={accordionItem.answer}
     />

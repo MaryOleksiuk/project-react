@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import './styles.scss';
 
 export const AccordionItem = (props) => {
-  let [ isContentVisible, setContentVisible ] = useState(false);
+  let [ isContentVisible, setContentVisible ] = useState();
+
+  const handleClick = (index) => {
+    setContentVisible(isContentVisible = !isContentVisible);
+  };
 
   return (
     <div
-      className={`accordion-item ${isContentVisible ? ' active' : ''} `}>
+      className={`accordion-item ${isContentVisible ? ' active' : ''} `} >
       <h3
         className='accordion-item__title'
-        onClick={() => setContentVisible(isContentVisible = !isContentVisible)}
+        onClick={handleClick}
       >
         { props.question }
       </h3>
