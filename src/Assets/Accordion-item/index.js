@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './styles.scss';
 
 export const AccordionItem = (props) => {
-  let [ isContentVisible, setContentVisible ] = useState(0);
+  let [ isContentVisible, setContentVisible ] = useState(false);
 
   const handleClick = () => {
     setContentVisible(isContentVisible = !isContentVisible);
