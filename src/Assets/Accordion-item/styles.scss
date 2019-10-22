@@ -1,4 +1,16 @@
 .accordion-item {
+  margin-bottom: 20px;
+
+  &.active {
+    .accordion-item__title {
+      color: #4886ff;
+    }
+
+    .accordion-item__panel {
+      display: block;
+    }
+  }
+
   &__title {
     height: 55px;
     padding: 0 3%;
@@ -28,10 +40,6 @@
       font-size: 26px;
       font-weight: 700;
       color: #606264;
-    }
-
-    &.active {
-      color: #4886ff;
     }
   }
 
