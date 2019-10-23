@@ -5,12 +5,16 @@ import './styles.scss';
 export const Accordion = (props) => {
   const { source } = props;
 
+  const [ id, setId ] = useState(false);
+
   const accordionItems = source.map((accordionItem, index) => (
     <AccordionItem
       key={index}
-      index={index}
       question={accordionItem.question}
       answer={accordionItem.answer}
+      id={index}
+      isOpened={id === index}
+      setId={setId}
     />
   ));
 
