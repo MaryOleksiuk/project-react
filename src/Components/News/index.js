@@ -6,16 +6,7 @@ export const News = (props) => {
   const { source } = props;
 
   const articles = source.map((obj, index) => (
-    <Article
-      key={ index }
-      title={ obj.title }
-      description={ obj.description }
-      published={ obj.published }
-      likes={ obj.likes }
-      comments={ obj.comments }
-      image={ obj.image }
-      tags={ obj.tags }
-    />
+    <Article {...obj} />
   ));
   return (
     <section className='news'>
