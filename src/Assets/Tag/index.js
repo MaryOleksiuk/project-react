@@ -4,8 +4,8 @@ import './styles.scss';
 
 export const Tag = (props) => {
   return (
-    <a className='tag'>
+    <button className='tag'>
       { props.source }
-    </a>
+    </button>
   )
 };
