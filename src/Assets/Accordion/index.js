@@ -21,7 +21,6 @@ export const Accordion = (props) => {
   return (
     <section className='accordion'>
       <h2 className='accordion__title'>Project Brief</h2>
-
       { accordionItems }
     </section>
   )
