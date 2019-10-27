@@ -8,7 +8,7 @@ import moment from 'moment';
 
 export const Article = (props) => {
 
-  const tagsSplitted = props.tags.split(',');
+  const tagsSplitted = props.tags.split(', ');
 
   const tags = tagsSplitted.map((tag, index) => (
     <Tag key={ index } source={ tag } />
