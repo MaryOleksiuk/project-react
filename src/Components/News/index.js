@@ -1,12 +1,13 @@
 import React from 'react';
 import './styles.scss';
 import { Article } from '../Article';
+import { useNews } from './useNews';
 
-export const News = (props) => {
-  const { source } = props;
+export const News = () => {
+  const { posts } = useNews();
 
-  const articles = source.map((obj, index) => (
-    <Article {...obj} />
+  const articles = posts.map((obj, index) => (
+    <Article {...obj} key={index} />
   ));
   return (
     <section className='news'>

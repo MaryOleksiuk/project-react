@@ -4,18 +4,20 @@ import { Tag } from '../../Assets/Tag';
 import { CommentsCounter } from '../../Assets/CommentsCounter';
 import { LikesCounter } from '../../Assets/LikesCounter';
 import { Share } from '../../Assets/Share';
+import moment from 'moment';
 
 export const Article = (props) => {
-  const date = new Date(props.published).toLocaleDateString();
 
-  const tags = props.tags.map((tag, index) => (
+  const tagsSplitted = props.tags.split(', ');
+
+  const tags = tagsSplitted.map((tag, index) => (
     <Tag key={ index } source={ tag } />
   ));
 
   return (
     <section className='article'>
       <div className='article__image'>
-        <img src={ props.image } alt='test'></img>
+        <img src={ props.poster } alt='test' />
         <div className='article__tags'>
           { tags }
         </div>
@@ -25,7 +27,7 @@ export const Article = (props) => {
         <p className='article__description'>{ props.description }</p>
       </div>
       <div className='article__footer'>
-        <span>{ date }</span>
+        <span>{ moment(props.date).format('DD.MM.YYYY') }</span>
 
         <div>
           <CommentsCounter counts={ props.comments } />
