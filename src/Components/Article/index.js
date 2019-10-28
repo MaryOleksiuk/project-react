@@ -5,6 +5,7 @@ import { CommentsCounter } from '../../Assets/CommentsCounter';
 import { LikesCounter } from '../../Assets/LikesCounter';
 import { Share } from '../../Assets/Share';
 import moment from 'moment';
+import { useHistory, useLocation } from 'react-router-dom';
 
 export const Article = (props) => {
 
@@ -14,8 +15,15 @@ export const Article = (props) => {
     <Tag key={ index } source={ tag } />
   ));
 
+  const history = useHistory();
+  const location = useLocation();
+
+  const openArticle = () => {
+    history.push(`${location.pathname}/${props.objectId}`);
+  };
+
   return (
-    <section className='article' >
+    <section className='article' onClick={openArticle}>
       <div className='article__image'>
         <img src={ props.poster } alt='' />
         <div className='article__tags'>

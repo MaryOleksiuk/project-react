@@ -11,6 +11,7 @@ export const App = () => {
     <>
       <Router history={history}>
         <Header />
+
         <Routes />
       </Router>
     </>
