@@ -18,7 +18,6 @@ export const News = () => {
 
   const authenticated = !(localStorage.getItem('authenticated') === null) ? JSON.parse(localStorage.getItem('authenticated')) : false;
 
-
   useEffect(() => {
     if (id) {
       setData(posts.filter(post => {
