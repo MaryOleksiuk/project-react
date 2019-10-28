@@ -15,9 +15,9 @@ export const Article = (props) => {
   ));
 
   return (
-    <section className='article'>
+    <section className='article' >
       <div className='article__image'>
-        <img src={ props.poster } alt='test' />
+        <img src={ props.poster } alt='' />
         <div className='article__tags'>
           { tags }
         </div>

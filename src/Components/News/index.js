@@ -31,7 +31,7 @@ export const News = () => {
 
 
   const articles = data.map((item) => {
-    return <Article {...item} key={item.objectId}/>
+    return <Article {...item} key={item.objectId} />
   });
 
   if((data.length === 0) && (isLoading === false)) {

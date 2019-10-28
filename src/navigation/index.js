@@ -7,13 +7,14 @@ import { PageNotFound } from '../Components/Page-not-found';
 
 export const Routes = () => (
   <>
-    <Route
-      component={Home}
-      path={book.root}
-      exact
-      restricted={false}
-    />
     <Switch>
+      <Route
+        component={Home}
+        path={book.root}
+        exact
+        restricted={false}
+      />
+
       <Route
         component={News}
         path={book.news}
