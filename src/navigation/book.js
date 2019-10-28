@@ -1,6 +1,7 @@
 export const book = Object.freeze({
-  root: '/home',
+  root: '/',
   news: '/news',
   newsItem: '/news/:id',
-  unknown: '/page-not-found'
+  unknown: '/page-not-found',
+  login: '/login'
 });
