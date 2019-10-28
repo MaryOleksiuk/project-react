@@ -29,7 +29,9 @@ export const useNews = () => {
   const getPosts = () => {
     (async () => {
       const posts = await api.getPosts();
-      localStorage.clear();
+      localStorage.removeItem('response');
+      localStorage.removeItem('lastUpdated');
+
       localStorage.setItem('response', JSON.stringify(posts));
       localStorage.setItem('lastUpdated', moment().format('HH:mm:ss'));
       setPosts(posts);
