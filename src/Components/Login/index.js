@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import './styles.scss';
 
 export const Login = () => {
   let history = useHistory();
@@ -14,8 +15,10 @@ export const Login = () => {
 
   return (
     <>
-      <p>You must log in to see full article</p>
-      <button onClick={login}>Log in</button>
+      <section className='login'>
+        <p>You must log in to see full article</p>
+        <button onClick={login}>Log in</button>
+      </section>
     </>
   )
 };

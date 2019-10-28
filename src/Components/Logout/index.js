@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { book } from '../../navigation/book';
+import './styles.scss';
 
 export const Logout = () => {
   let history = useHistory();

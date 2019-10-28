@@ -43,11 +43,13 @@ export const News = () => {
 
   return (
     <>
-      <h1>News</h1>
-      {(authenticated && id) ? <Logout /> : ''}
+      <section className="news">
+        <h1>News</h1>
+        {(authenticated && id) ? <Logout /> : ''}
 
-      <section className='news'>
-        { isLoading ? <Loader/> : articles }
+        <div className='news__content'>
+          { isLoading ? <Loader/> : articles }
+        </div>
       </section>
     </>
   )
