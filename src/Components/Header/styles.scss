@@ -1,0 +1,23 @@
+.header {
+  ul {
+    height: 50px;
+    margin: 0;
+    padding-left: 30px;
+    list-style-type: none;
+
+    li {
+      display: inline-block;
+      margin-right: 20px;
+      line-height: 50px;
+    }
+
+    a {
+      color: midnightblue;
+      text-decoration: none;
+
+      &.active {
+        text-decoration: underline;
+      }
+    }
+  }
+}

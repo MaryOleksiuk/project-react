@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Routes } from './navigation';
-import { history } from './navigation/history';
-import { Router } from 'react-router-dom';
 import './styles.scss';
 
 import * as serviceWorker from './serviceWorker';
+import {App} from './App';
 
 ReactDOM.render(
-  <Router history={history}>
-    <Routes />
-  </Router>
+  <App />
   , document.getElementById('root')
 );
 
