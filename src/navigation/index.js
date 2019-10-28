@@ -14,7 +14,6 @@ export const Routes = () => (
         component={Home}
         path={book.root}
         exact
-        restricted={false}
       />
 
       <Route
@@ -44,6 +43,7 @@ export const Routes = () => (
       </PrivateRoute>
 
       <Redirect to={book.unknown} />
+
     </Switch>
   </>
 );
