@@ -16,6 +16,7 @@ export const News = () => {
   const history = useHistory();
   const { id } = useParams();
 
+
   useEffect(() => {
     if (id) {
       setData(posts.filter(post => {
