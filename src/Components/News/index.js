@@ -8,17 +8,34 @@ import { book } from '../../navigation/book';
 import {Logout} from '../Logout';
 
 export const News = () => {
-  const { id, isLoading, posts } = useNews();
+  const { posts, setLoading, isLoading } = useNews();
+
+  const [ data, setData ] = useState([]);
+
+  const { id } = useParams();
 
   const history = useHistory();
-
   const authenticated = !(localStorage.getItem('authenticated') === null) ? JSON.parse(localStorage.getItem('authenticated')) : false;
 
-  const articles = posts.map((item) => {
+  useEffect(() => {
+    if (id) {
+      setData(posts.filter(post => {
+        return post.objectId === id;
+      }));
+    } else {
+      setData(posts);
+    }
+
+    (posts.length > 0) ? setLoading(false) : setLoading(true);
+
+  }, [posts, id]);
+
+
+  const articles = data.map((item) => {
     return <Article {...item} key={item.objectId} />
   });
 
-  if((posts.length === 0) && (isLoading === false)) {
+  if((data.length === 0) && (isLoading === false)) {
     history.push(book.unknown);
   }
 
