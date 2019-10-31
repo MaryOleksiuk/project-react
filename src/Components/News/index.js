@@ -30,14 +30,14 @@ export const News = () => {
 
   }, [posts, id]);
 
+  if((data.length === 0) && (isLoading === false)) {
+    history.push(book.unknown);
+  }
+
 
   const articles = data.map((item) => {
     return <Article {...item} key={item.objectId} />
   });
-
-  if((data.length === 0) && (isLoading === false)) {
-    history.push(book.unknown);
-  }
 
   return (
     <>

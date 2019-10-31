@@ -18,15 +18,6 @@ export const useNews = () => {
 
       localStorage.setItem('response', JSON.stringify(posts));
       localStorage.setItem('lastUpdated', moment().format('HH:mm:ss'));
-
-      if (id) {
-        setPosts(posts.filter(post => {
-          return post.objectId === id;
-        }));
-      } else {
-        setPosts(posts);
-      }
-
     })();
   };
 
