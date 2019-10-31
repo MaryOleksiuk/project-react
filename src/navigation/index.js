@@ -6,6 +6,7 @@ import { Home } from '../Views/Home';
 import { PageNotFound } from '../Components/Page-not-found';
 import { Login } from '../Components/Login';
 import { PrivateRoute } from './PrivateRoute';
+import {StudentRegistration} from '../Components/StudentRegistration';
 
 export const Routes = () => (
   <>
@@ -33,6 +34,12 @@ export const Routes = () => (
       <Route
         component={Login}
         path={book.login}
+        exact
+      />
+
+      <Route
+        component={StudentRegistration}
+        path={book.studentRegistration}
         exact
       />
 
