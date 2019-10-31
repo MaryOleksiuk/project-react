@@ -6,8 +6,6 @@ import {useParams} from 'react-router-dom';
 export const useNews = () => {
   const [ posts, setPosts ] = useState([]);
 
-  const { id } = useParams();
-
   const [ isLoading, setLoading ] = useState(true);
 
   const getPosts = () => {
@@ -41,5 +39,5 @@ export const useNews = () => {
     }
   }, []);
 
-  return { id, isLoading, posts, setLoading }
+  return { isLoading, posts, setLoading }
 };
