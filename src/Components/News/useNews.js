@@ -8,22 +8,19 @@ export const useNews = () => {
   useEffect(() => {
     const { lastUpdated, response } = localStorage;
 
+    // Define if Request from Local Storage is needed
+    let isLocalStorageRequest = false;
+
     if(lastUpdated && posts) {
       const now = moment().format('HH:mm:ss');
-
       const minimumDiff = 10;
       const diffInMins = moment.utc(now, 'HH:mm:ss').diff(moment.utc(lastUpdated, 'HH:mm:ss'), 'minutes');
 
-      if(diffInMins <= minimumDiff) {
-        setPosts(JSON.parse(response));
-      } else {
-        getPosts();
-      }
-    } else {
-      getPosts();
+      (diffInMins <= minimumDiff) ? isLocalStorageRequest = true : isLocalStorageRequest = false;
     }
 
-    getPosts();
+    isLocalStorageRequest ? setPosts(JSON.parse(response)) : getPosts();
+
   }, []);
 
   const getPosts = () => {
