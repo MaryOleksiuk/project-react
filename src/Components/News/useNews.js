@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
 import { api } from './api';
 import moment from 'moment';
+import { useParams } from 'react-router-dom';
 
 export const useNews = () => {
   const [ posts, setPosts ] = useState([]);
+
+  const { id } = useParams();
+
+  const [ isLoading, setLoading ] = useState(true);
 
   useEffect(() => {
     const { lastUpdated, response } = localStorage;
@@ -19,6 +24,8 @@ export const useNews = () => {
       (diffInMins <= minimumDiff) ? isLocalStorageRequest = true : isLocalStorageRequest = false;
     }
 
+    (posts.length > 0) ? setLoading(false) : setLoading(true);
+
     isLocalStorageRequest ? setPosts(JSON.parse(response)) : getPosts();
 
   }, []);
@@ -31,9 +38,17 @@ export const useNews = () => {
 
       localStorage.setItem('response', JSON.stringify(posts));
       localStorage.setItem('lastUpdated', moment().format('HH:mm:ss'));
-      setPosts(posts);
+
+
+      if (id) {
+        setPosts(posts.filter(post => {
+          return post.objectId === id;
+        }));
+      } else {
+        setPosts(posts);
+      }
     })();
   };
 
-  return { posts }
+  return { id, isLoading, posts }
 };

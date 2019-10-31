@@ -8,35 +8,17 @@ import { book } from '../../navigation/book';
 import {Logout} from '../Logout';
 
 export const News = () => {
-  const { posts } = useNews();
-
-  const [ isLoading, setLoading ] = useState(true);
-  const [ data, setData ] = useState([]);
+  const { id, isLoading, posts } = useNews();
 
   const history = useHistory();
-  const { id } = useParams();
 
   const authenticated = !(localStorage.getItem('authenticated') === null) ? JSON.parse(localStorage.getItem('authenticated')) : false;
 
-  useEffect(() => {
-    if (id) {
-      setData(posts.filter(post => {
-        return post.objectId === id;
-      }));
-    } else {
-      setData(posts);
-    }
-
-    (posts.length > 0) ? setLoading(false) : setLoading(true);
-
-  }, [posts, id]);
-
-
-  const articles = data.map((item) => {
+  const articles = posts.map((item) => {
     return <Article {...item} key={item.objectId} />
   });
 
-  if((data.length === 0) && (isLoading === false)) {
+  if((posts.length === 0) && (isLoading === false)) {
     history.push(book.unknown);
   }
 
