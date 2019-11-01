@@ -1,6 +1,7 @@
 import React from 'react';
 import {Formik, Form, Field} from 'formik';
 import 'bootstrap-css-only/css/bootstrap.min.css';
+import './styles.scss';
 
 export const StudentRegistration = () => {
 
@@ -13,8 +14,15 @@ export const StudentRegistration = () => {
     speciality: ''
   };
 
-  const submitForm = () => {
+  const submitForm = (values, {setSubmitting, resetForm}) => {
+    console.log('Form values', values);
 
+    setTimeout(() => {
+      resetForm(initialValues);
+      setSubmitting(false);
+    }, 500);
+
+    alert('Thank you! You\'ve submitted the form');
   };
 
   return (
@@ -25,34 +33,50 @@ export const StudentRegistration = () => {
         initialValues={initialValues}
         onSubmit={submitForm}
       >
-        {() => {
+        {(props) => {
+
+          const { isSubmitting, handleSubmit } = props;
 
           return(
-            <Form>
-              <label htmlFor="firstName">First name</label>
-              <Field type='text' as='input' name='firstName' placeholder='First name' />
+            <Form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="firstName">First name</label>
+                <Field type='text' as='input' name='firstName' placeholder='First name' className='form-control' />
+              </div>
 
-              <label htmlFor="surname">Surname</label>
-              <Field type='text' as='input' name='surname' placeholder='Surname' />
+              <div className="form-group">
+                <label htmlFor="surname">Surname</label>
+                <Field type='text' as='input' name='surname' placeholder='Surname' className='form-control' />
+              </div>
 
-              <label htmlFor="age">Age</label>
-              <Field type='text' as='input' name='age' placeholder='Age' />
+              <div className="form-group">
+                <label htmlFor="age">Age</label>
+                <Field type='number' as='input' name='age' placeholder='Age' className='form-control'  />
+              </div>
 
-              <label htmlFor="email">Email</label>
-              <Field type='email' as='input' name='email' placeholder='Email' />
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <Field type='email' as='input' name='email' placeholder='Email' className='form-control'  />
+              </div>
 
-              <label htmlFor="sex">Sex</label>
-              <Field type='text' as='select' name='sex' placeholder='Sex'>
-                <option value='male'>Male</option>
-                <option value='female'>Female</option>
-              </Field>
+              <div className="form-group">
+                <label htmlFor="sex">Sex</label>
+                <Field type='text' as='select' name='sex' placeholder='Sex' className='form-control'>
+                  <option value='male'>Male</option>
+                  <option value='female'>Female</option>
+                </Field>
+              </div>
 
-              <label htmlFor="speciality">Speciality</label>
-              <Field type='text' as='select' name='speciality' placeholder='Speciality'>
-                <option value='designer'>Designer</option>
-                <option value='developer'>Developer</option>
-                <option value='writer'>Writer</option>
-              </Field>
+              <div className="form-group">
+                <label htmlFor="speciality">Speciality</label>
+                <Field type='text' as='select' name='speciality' placeholder='Speciality' className='form-control'>
+                  <option value='designer'>Designer</option>
+                  <option value='developer'>Developer</option>
+                  <option value='writer'>Writer</option>
+                </Field>
+              </div>
+
+              <button disabled={isSubmitting} type='submit' className='btn btn-primary mb-2'>Submit</button>
             </Form>
           )
         }}

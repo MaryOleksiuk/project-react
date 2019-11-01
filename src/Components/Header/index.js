@@ -16,6 +16,10 @@ export const Header = () => {
         <li>
           <NavLink to={book.news} activeClassName='selected'>News</NavLink>
         </li>
+
+        <li>
+          <NavLink to={book.studentRegistration} activeClassName='selected'>Student registration</NavLink>
+        </li>
       </ul>
     </header>
   )

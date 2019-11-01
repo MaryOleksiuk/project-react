@@ -1,0 +1,18 @@
+.form {
+  padding: 30px;
+  width: 50%;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+label {
+  padding-right: 10px;
+}
+
+.btn-primary.disabl {
+  opacity: .5 !important;
+  cursor: none !important;
+  color: red!important;
+}
