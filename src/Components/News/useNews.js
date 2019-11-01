@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from './api';
 import moment from 'moment';
-import {useParams} from 'react-router-dom';
 
 export const useNews = () => {
   const [ posts, setPosts ] = useState([]);

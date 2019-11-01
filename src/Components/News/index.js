@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import './styles.scss';
 import { Article } from '../Article';
 import { useNews } from './useNews';
 import { Loader } from '../../Assets/Loader';
 import { book } from '../../navigation/book';
-import {Logout} from '../Logout';
+import { Logout } from '../Logout';
+import './styles.scss';
 
 export const News = () => {
   const { posts, setLoading, isLoading } = useNews();
