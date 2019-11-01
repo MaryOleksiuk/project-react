@@ -14,11 +14,18 @@ export const StudentRegistration = () => {
     speciality: ''
   };
 
-  const submitForm = (values, {setSubmitting, resetForm}) => {
+  const addToLocalStorage = (data) => {
+    localStorage.setItem('student', JSON.stringify(data));
+  };
+
+  const dataFromLocalStorage = !(localStorage.getItem('student') === null) ? JSON.parse(localStorage.getItem('student')) : false;
+
+  const submitForm = (values, {setSubmitting}) => {
+    addToLocalStorage(values);
+
     console.log('Form values', values);
 
     setTimeout(() => {
-      resetForm(initialValues);
       setSubmitting(false);
     }, 500);
 
@@ -30,7 +37,7 @@ export const StudentRegistration = () => {
       <h1>Student Registration Form</h1>
 
       <Formik
-        initialValues={initialValues}
+        initialValues={dataFromLocalStorage ? dataFromLocalStorage : initialValues}
         onSubmit={submitForm}
       >
         {(props) => {
@@ -76,7 +83,7 @@ export const StudentRegistration = () => {
                 </Field>
               </div>
 
-              <button disabled={isSubmitting} type='submit' className='btn btn-primary mb-2'>Submit</button>
+              <button disabled={isSubmitting} type='submit' className='btn btn-primary mb-2'>{dataFromLocalStorage ? 'Update data' : 'Submit'}</button>
             </Form>
           )
         }}
