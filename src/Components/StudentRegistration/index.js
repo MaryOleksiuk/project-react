@@ -38,13 +38,13 @@ export const StudentRegistration = () => {
 
     if(!values.firstName) {
       errors.firstName = 'Required';
-    } else if(/\d/.test(values.firstName)) {
+    } else if(/\d/.test(values.firstName) || typeof values.firstName !== 'string') {
       errors.firstName = 'Name should be a string';
     }
 
     if(!values.surname) {
       errors.surname = 'Required';
-    } else if(/\d/.test(values.surname)) {
+    } else if(/\d/.test(values.surname) || typeof values.surname !== 'string') {
       errors.surname = 'Surname should be a string';
     }
 
@@ -52,8 +52,10 @@ export const StudentRegistration = () => {
       errors.email = 'Invalid email address';
     }
 
-    if(values.age < 6 || values.age > 60 ) {
+    if((values.age < 6 || values.age > 60) && values.age  ) {
       errors.age = 'Age should be between 6 and 60';
+    } else if(typeof values.age !== 'number') {
+      errors.age = 'Age should be a number';
     }
 
     if(!values.sex) {
@@ -119,6 +121,7 @@ export const StudentRegistration = () => {
               <div className='form-group'>
                 <label htmlFor='sex'>Sex</label>
                 <Field type='text' as='select' name='sex' placeholder='Sex' className={'form-control ' + (touched.sex && errors.sex ? 'is-invalid' : '')}>
+                  <option value="">Select sex</option>
                   <option value='male'>Male</option>
                   <option value='female'>Female</option>
                 </Field>
@@ -129,6 +132,7 @@ export const StudentRegistration = () => {
               <div className='form-group'>
                 <label htmlFor='speciality'>Speciality</label>
                 <Field type='text' as='select' name='speciality' placeholder='Speciality' className={'form-control ' + (touched.speciality && errors.speciality ? 'is-invalid' : '')}>
+                  <option value="">Select speciality</option>
                   <option value='designer'>Designer</option>
                   <option value='developer'>Developer</option>
                   <option value='writer'>Writer</option>
