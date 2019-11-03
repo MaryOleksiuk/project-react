@@ -62,6 +62,7 @@ export const StudentRegistration = () => {
               <div className="form-group">
                 <label htmlFor="sex">Sex</label>
                 <Field type='text' as='select' name='sex' placeholder='Sex' className='form-control'>
+                  <option value="">Select sex</option>
                   <option value='male'>Male</option>
                   <option value='female'>Female</option>
                 </Field>
@@ -70,6 +71,7 @@ export const StudentRegistration = () => {
               <div className="form-group">
                 <label htmlFor="speciality">Speciality</label>
                 <Field type='text' as='select' name='speciality' placeholder='Speciality' className='form-control'>
+                  <option value="">Select speciality</option>
                   <option value='designer'>Designer</option>
                   <option value='developer'>Developer</option>
                   <option value='writer'>Writer</option>
