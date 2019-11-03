@@ -12,7 +12,9 @@ export const StudentRegistration = () => {
     age: '',
     email: '',
     sex: '',
-    speciality: ''
+    speciality: '',
+    password: '',
+    confirmpassword: ''
   };
 
   const addToLocalStorage = (data) => {
@@ -44,6 +46,15 @@ export const StudentRegistration = () => {
     email: Yup.string()
       .email('Invalid email')
       .required('Required'),
+    password: Yup.string()
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*[0-9]{3,})(?=.{10,})/,
+        'Must contain 10 characters, lowercase characters and at least 3 numbers '
+      )
+      .required('Required'),
+    confirmpassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords do not match')
+      .required('Required'),
     sex: Yup.string()
       .oneOf([
         'male',
@@ -56,7 +67,7 @@ export const StudentRegistration = () => {
         'developer',
         'writer'
       ], 'Invalid speciality')
-      .required('Required')
+      .required('Required'),
   });
 
 
@@ -107,6 +118,20 @@ export const StudentRegistration = () => {
                 />
 
                 <span className='text-danger'>{ touched.email && errors.email }</span>
+              </div>
+
+              <div className='form-group'>
+                <label htmlFor='password'>Password</label>
+                <Field type='password' as='input' name='password' placeholder='Password' className={'form-control ' + (touched.password && errors.password ? 'is-invalid' : '')} />
+
+                <span className='text-danger'>{ touched.password && errors.password }</span>
+              </div>
+
+              <div className='form-group'>
+                <label htmlFor='confirmpassword'>Confirm password</label>
+                <Field type='password' as='input' name='confirmpassword' placeholder='Confirm password' className={'form-control ' + (touched.confirmpassword && errors.confirmpassword ? 'is-invalid' : '')} />
+
+                <span className='text-danger'>{ touched.confirmpassword && errors.confirmpassword }</span>
               </div>
 
               <div className='form-group'>
