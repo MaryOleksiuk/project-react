@@ -47,9 +47,10 @@ export const StudentRegistration = () => {
       .email('Invalid email')
       .required('Required'),
     password: Yup.string()
+      .min(10, 'Password must contain at least 10 characters')
       .matches(
-        /^(?=.*[A-Za-z])(?=.*[0-9]{3,})(?=.{10,})/,
-        'Must contain 10 characters, lowercase characters and at least 3 numbers '
+        /^(?=.*[A-Za-z])(?=.*[0-9]{3,})/,
+        'Must contain characters and at least 3 numbers'
       )
       .required('Required'),
     confirmpassword: Yup.string()
