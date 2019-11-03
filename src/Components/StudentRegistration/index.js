@@ -1,7 +1,8 @@
 import React from 'react';
-import {Formik, Form, Field} from 'formik';
+import { Formik, Form, Field } from 'formik';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import './styles.scss';
+import * as Yup from 'yup';
 
 export const StudentRegistration = () => {
 
@@ -32,40 +33,32 @@ export const StudentRegistration = () => {
     alert('Thank you! You\'ve submitted the form');
   };
 
-  // Form validation
-  const validateFormFields = (values) => {
-    let errors = {};
+  const studentSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .required('Required'),
+    surname: Yup.string()
+      .required('Required'),
+    age: Yup.number()
+      .min(6, 'You should be older than 6')
+      .max(60, 'You should be younger than 60'),
+    email: Yup.string()
+      .email('Invalid email')
+      .required('Required'),
+    sex: Yup.string()
+      .oneOf([
+        'male',
+        'female'
+      ], 'Invalid sex')
+      .required('Required'),
+    speciality: Yup.string()
+      .oneOf([
+        'designer',
+        'developer',
+        'writer'
+      ], 'Invalid speciality')
+      .required('Required')
+  });
 
-    if(!values.firstName) {
-      errors.firstName = 'Required';
-    } else if(/\d/.test(values.firstName)) {
-      errors.firstName = 'Name should be a string';
-    }
-
-    if(!values.surname) {
-      errors.surname = 'Required';
-    } else if(/\d/.test(values.surname)) {
-      errors.surname = 'Surname should be a string';
-    }
-
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
-    }
-
-    if(values.age < 6 || values.age > 60 ) {
-      errors.age = 'Age should be between 6 and 60';
-    }
-
-    if(!values.sex) {
-      errors.sex = 'Required';
-    }
-
-    if(!values.speciality) {
-      errors.speciality = 'Required';
-    }
-
-    return errors;
-  };
 
   return (
     <section className='form'>
@@ -74,7 +67,7 @@ export const StudentRegistration = () => {
       <Formik
         initialValues={dataFromLocalStorage ? dataFromLocalStorage : initialValues}
         onSubmit={submitForm}
-        validate={validateFormFields}
+        validationSchema={studentSchema}
       >
         {(props) => {
 
@@ -119,6 +112,7 @@ export const StudentRegistration = () => {
               <div className='form-group'>
                 <label htmlFor='sex'>Sex</label>
                 <Field type='text' as='select' name='sex' placeholder='Sex' className={'form-control ' + (touched.sex && errors.sex ? 'is-invalid' : '')}>
+                  <option value="">Select sex</option>
                   <option value='male'>Male</option>
                   <option value='female'>Female</option>
                 </Field>
@@ -129,6 +123,7 @@ export const StudentRegistration = () => {
               <div className='form-group'>
                 <label htmlFor='speciality'>Speciality</label>
                 <Field type='text' as='select' name='speciality' placeholder='Speciality' className={'form-control ' + (touched.speciality && errors.speciality ? 'is-invalid' : '')}>
+                  <option value="">Select speciality</option>
                   <option value='designer'>Designer</option>
                   <option value='developer'>Developer</option>
                   <option value='writer'>Writer</option>
