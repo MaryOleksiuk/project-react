@@ -11,12 +11,25 @@ label {
   padding-right: 10px;
 }
 
-.btn-primary.disabl {
-  opacity: .5 !important;
-  cursor: none !important;
-  color: red!important;
-}
-
 .text-success {
   margin-bottom: 30px;
+}
+
+.custom-label {
+  margin-right: 20px;
+  margin-bottom: 0;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  input {
+    width: auto;
+    height: 18px;
+    margin-right: 10px;
+
+    &:focus {
+      outline: none;
+    }
+  }
 }

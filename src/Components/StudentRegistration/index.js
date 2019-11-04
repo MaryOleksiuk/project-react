@@ -20,9 +20,7 @@ export const StudentRegistration = () => {
     console.log('Form values', values);
 
     setFormFilled(true);
-
     resetForm(initialValues);
-    setSubmitting(false);
   };
 
   return (
@@ -38,11 +36,10 @@ export const StudentRegistration = () => {
         onSubmit={submitForm}
       >
         {(props) => {
-
-          const { isSubmitting, handleSubmit } = props;
+          const { isSubmitting } = props;
 
           return(
-            <Form onSubmit={handleSubmit}>
+            <Form>
               <div className="form-group">
                 <label htmlFor="firstName">First name</label>
                 <Field type='text' as='input' name='firstName' placeholder='First name' className='form-control' />
@@ -64,12 +61,15 @@ export const StudentRegistration = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="sex">Sex</label>
-                <Field type='text' as='select' name='sex' placeholder='Sex' className='form-control'>
-                  <option value="">Select sex</option>
-                  <option value='male'>Male</option>
-                  <option value='female'>Female</option>
-                </Field>
+                <label htmlFor="sex">Sex</label><br/>
+                <label className='custom-label'>
+                  <Field type='radio' as='input' name='sex' className='form-control' value='male' />
+                  Male
+                </label>
+                <label className='custom-label'>
+                 <Field type='radio' as='input' name='sex' className='form-control' value='female' />
+                  Female
+                </label>
               </div>
 
               <div className="form-group">
