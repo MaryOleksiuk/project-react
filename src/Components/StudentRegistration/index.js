@@ -1,30 +1,18 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { studentActions  } from '../../bus/student/actions';
 import { Formik, Form, Field } from 'formik';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import './styles.scss';
 import * as Yup from 'yup';
+import { useSelector } from 'react-redux';
 
 export const StudentRegistration = () => {
-
-  const initialValues = {
-    firstName: '',
-    surname: '',
-    age: '',
-    email: '',
-    sex: '',
-    speciality: '',
-    password: '',
-    confirmpassword: ''
-  };
-
-  const addToLocalStorage = (data) => {
-    localStorage.setItem('student', JSON.stringify(data));
-  };
-
-  const dataFromLocalStorage = !(localStorage.getItem('student') === null) ? JSON.parse(localStorage.getItem('student')) : false;
+  const initialValues = useSelector((state) => state.student);
+  const dispatch = useDispatch();
 
   const submitForm = (values, {setSubmitting}) => {
-    addToLocalStorage(values);
+    dispatch(studentActions.setStudent(values));
 
     console.log('Form values', values);
 
@@ -77,7 +65,7 @@ export const StudentRegistration = () => {
       <h1>Student Registration Form</h1>
 
       <Formik
-        initialValues={dataFromLocalStorage ? dataFromLocalStorage : initialValues}
+        initialValues={initialValues}
         onSubmit={submitForm}
         validationSchema={studentSchema}
       >
@@ -158,7 +146,7 @@ export const StudentRegistration = () => {
                 <span className='text-danger'>{ touched.speciality && errors.speciality }</span>
               </div>
 
-              <button disabled={isSubmitting} type='submit' className='btn btn-primary mb-2'>{dataFromLocalStorage ? 'Update data' : 'Submit'}</button>
+              <button disabled={isSubmitting} type='submit' className='btn btn-primary mb-2'>{initialValues.firstName ? 'Update' : 'Submit'}</button>
             </Form>
           )
         }}
