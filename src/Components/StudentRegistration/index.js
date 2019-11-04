@@ -1,9 +1,11 @@
 import React from 'react';
-import {Formik, Form, Field} from 'formik';
+import { Formik, Form, Field } from 'formik';
+import { useLocalStorage } from './useLocalStorage';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import './styles.scss';
 
 export const StudentRegistration = () => {
+  const { dataFromLocalStorage, addToLocalStorage } = useLocalStorage();
 
   const initialValues = {
     firstName: '',
@@ -13,12 +15,6 @@ export const StudentRegistration = () => {
     sex: '',
     speciality: ''
   };
-
-  const addToLocalStorage = (data) => {
-    localStorage.setItem('student', JSON.stringify(data));
-  };
-
-  const dataFromLocalStorage = !(localStorage.getItem('student') === null) ? JSON.parse(localStorage.getItem('student')) : false;
 
   const submitForm = (values, {setSubmitting}) => {
     addToLocalStorage(values);
