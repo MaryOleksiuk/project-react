@@ -1,5 +1,5 @@
-import React from 'react';
-import {Formik, Form, Field} from 'formik';
+import React, { useState } from 'react';
+import { Formik, Form, Field } from 'formik';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import './styles.scss';
 
@@ -14,20 +14,24 @@ export const StudentRegistration = () => {
     speciality: ''
   };
 
+  let [formFilled, setFormFilled] = useState(false);
+
   const submitForm = (values, {setSubmitting, resetForm}) => {
     console.log('Form values', values);
 
-    setTimeout(() => {
-      resetForm(initialValues);
-      setSubmitting(false);
-    }, 500);
+    setFormFilled(true);
 
-    alert('Thank you! You\'ve submitted the form');
+    resetForm(initialValues);
+    setSubmitting(false);
   };
 
   return (
     <section className='form'>
       <h1>Student Registration Form</h1>
+
+      {formFilled &&
+        <h3 className='text-success'>Form is filled! Thank you!</h3>
+      }
 
       <Formik
         initialValues={initialValues}
