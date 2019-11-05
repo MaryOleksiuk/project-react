@@ -5,26 +5,7 @@ import moment from 'moment';
 export const useNews = () => {
   const [ posts, setPosts ] = useState([]);
 
-  useEffect(() => {
-    const { lastUpdated, response } = localStorage;
-
-    if(lastUpdated && posts) {
-      const now = moment().format('HH:mm:ss');
-
-      const minimumDiff = 10;
-      const diffInMins = moment.utc(now, 'HH:mm:ss').diff(moment.utc(lastUpdated, 'HH:mm:ss'), 'minutes');
-
-      if(diffInMins <= minimumDiff) {
-        setPosts(JSON.parse(response));
-      } else {
-        getPosts();
-      }
-    } else {
-      getPosts();
-    }
-
-    getPosts();
-  }, []);
+  const [ isLoading, setLoading ] = useState(true);
 
   const getPosts = () => {
     (async () => {
@@ -34,9 +15,28 @@ export const useNews = () => {
 
       localStorage.setItem('response', JSON.stringify(posts));
       localStorage.setItem('lastUpdated', moment().format('HH:mm:ss'));
-      setPosts(posts);
     })();
   };
 
-  return { posts }
+  useEffect(() => {
+    setLoading(true);
+
+    const { lastUpdated, response } = localStorage;
+
+    let isLocalStorageRequest = false;
+
+    if(lastUpdated && posts) {
+      const now = moment().format('HH:mm:ss');
+
+      const minimumDiff = 10;
+      const diffInMins = moment.utc(now, 'HH:mm:ss').diff(moment.utc(lastUpdated, 'HH:mm:ss'), 'minutes');
+
+      isLocalStorageRequest = diffInMins < minimumDiff;
+
+      isLocalStorageRequest ? setPosts(JSON.parse(response)) : getPosts();
+      setLoading(false);
+    }
+  }, []);
+
+  return { isLoading, posts, setLoading }
 };

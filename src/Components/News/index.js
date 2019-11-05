@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import './styles.scss';
 import { Article } from '../Article';
 import { useNews } from './useNews';
 import { Loader } from '../../Assets/Loader';
 import { book } from '../../navigation/book';
-import {Logout} from '../Logout';
+import { Logout } from '../Logout';
+import './styles.scss';
 
 export const News = () => {
-  const { posts } = useNews();
+  const { posts, setLoading, isLoading } = useNews();
 
-  const [ isLoading, setLoading ] = useState(true);
   const [ data, setData ] = useState([]);
 
-  const history = useHistory();
   const { id } = useParams();
 
+  const history = useHistory();
   const authenticated = !(localStorage.getItem('authenticated') === null) ? JSON.parse(localStorage.getItem('authenticated')) : false;
 
   useEffect(() => {
@@ -31,14 +30,14 @@ export const News = () => {
 
   }, [posts, id]);
 
+  if((data.length === 0) && (isLoading === false)) {
+    history.push(book.unknown);
+  }
+
 
   const articles = data.map((item) => {
     return <Article {...item} key={item.objectId} />
   });
-
-  if((data.length === 0) && (isLoading === false)) {
-    history.push(book.unknown);
-  }
 
   return (
     <>
