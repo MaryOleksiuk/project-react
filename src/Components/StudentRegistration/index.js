@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch }, { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { studentActions  } from '../../bus/student/actions';
 import { Formik, Form, Field } from 'formik';
 import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -12,12 +12,11 @@ export const StudentRegistration = () => {
   
   let [formFilled, setFormFilled] = useState(false);
 
-  const submitForm = (values, {setSubmitting, resetForm}) => {
+  const submitForm = (values) => {
     dispatch(studentActions.setStudent(values));
     console.log('Form values', values);
 
     setFormFilled(true);
-    resetForm(initialValues);
   };
 
   const studentSchema = Yup.object().shape({
