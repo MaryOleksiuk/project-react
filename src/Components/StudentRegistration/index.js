@@ -15,7 +15,6 @@ export const StudentRegistration = () => {
   const submitForm = (values) => {
     dispatch(studentActions.setStudent(values));
     console.log('Form values', values);
-
     setFormFilled(true);
   };
 
@@ -117,7 +116,6 @@ export const StudentRegistration = () => {
               <div className='form-group'>
                 <label htmlFor='confirmpassword'>Confirm password</label>
                 <Field type='password' as='input' name='confirmpassword' placeholder='Confirm password' className={'form-control ' + (touched.confirmpassword && errors.confirmpassword ? 'is-invalid' : '')} />
-
                 <span className='text-danger'>{ touched.confirmpassword && errors.confirmpassword }</span>
               </div>
 
