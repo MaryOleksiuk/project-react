@@ -4,6 +4,7 @@ import { studentActions  } from '../../bus/student/actions';
 import { Formik, Form, Field } from 'formik';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import './styles.scss';
+import { validateFormFields } from './useValidation';
 import * as Yup from 'yup';
 
 export const StudentRegistration = () => {
@@ -17,7 +18,7 @@ export const StudentRegistration = () => {
     console.log('Form values', values);
     setFormFilled(true);
   };
-
+  
   const studentSchema = Yup.object().shape({
     firstName: Yup.string()
       .required('Required'),
@@ -53,7 +54,6 @@ export const StudentRegistration = () => {
       ], 'Invalid speciality')
       .required('Required'),
   });
-
 
   return (
     <section className='form'>
