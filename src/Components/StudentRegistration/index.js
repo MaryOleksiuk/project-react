@@ -7,8 +7,6 @@ import './styles.scss';
 import * as Yup from 'yup';
 
 export const StudentRegistration = () => {
-  const { dataFromLocalStorage, addToLocalStorage } = useLocalStorage();
-  
   const initialValues = useSelector((state) => state.student);
   const dispatch = useDispatch();
   
