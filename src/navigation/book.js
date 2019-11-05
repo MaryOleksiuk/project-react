@@ -4,5 +4,6 @@ export const book = Object.freeze({
   newsItem: '/news/:id',
   unknown: '/page-not-found',
   login: '/login',
-  studentRegistration: '/student/registration'
+  studentRegistration: '/student/registration',
+  student: '/student'
 });
