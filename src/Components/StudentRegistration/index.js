@@ -1,49 +1,74 @@
-import React from 'react';
-import {Formik, Form, Field} from 'formik';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { studentActions  } from '../../bus/student/actions';
+import { Formik, Form, Field } from 'formik';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import './styles.scss';
 import { validateFormFields } from './useValidation';
+import * as Yup from 'yup';
 
 export const StudentRegistration = () => {
+  const initialValues = useSelector((state) => state.student);
+  const dispatch = useDispatch();
+  
+  let [formFilled, setFormFilled] = useState(false);
 
-  const initialValues = {
-    firstName: '',
-    surname: '',
-    age: '',
-    email: '',
-    sex: '',
-    speciality: ''
-  };
-
-  const addToLocalStorage = (data) => {
-    localStorage.setItem('student', JSON.stringify(data));
-  };
-
-  const dataFromLocalStorage = !(localStorage.getItem('student') === null) ? JSON.parse(localStorage.getItem('student')) : false;
-
-  const submitForm = (values, {setSubmitting}) => {
-    addToLocalStorage(values);
-
+  const submitForm = (values) => {
+    dispatch(studentActions.setStudent(values));
     console.log('Form values', values);
-
-    setTimeout(() => {
-      setSubmitting(false);
-    }, 500);
-
-    alert('Thank you! You\'ve submitted the form');
+    setFormFilled(true);
   };
+  
+  const studentSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .required('Required'),
+    surname: Yup.string()
+      .required('Required'),
+    age: Yup.number()
+      .min(6, 'You should be older than 6')
+      .max(60, 'You should be younger than 60'),
+    email: Yup.string()
+      .email('Invalid email')
+      .required('Required'),
+    password: Yup.string()
+      .min(10, 'Password must contain at least 10 characters')
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*[0-9]{3,})/,
+        'Must contain characters and at least 3 numbers'
+      )
+      .required('Required'),
+    confirmpassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords do not match')
+      .required('Required'),
+    sex: Yup.string()
+      .oneOf([
+        'male',
+        'female'
+      ], 'Invalid sex')
+      .required('Required'),
+    speciality: Yup.string()
+      .oneOf([
+        'designer',
+        'developer',
+        'writer'
+      ], 'Invalid speciality')
+      .required('Required'),
+  });
 
   return (
     <section className='form'>
       <h1>Student Registration Form</h1>
 
+      {formFilled &&
+        <h3 className='text-success'>Form is filled! Thank you!</h3>
+      }
+
       <Formik
-        initialValues={dataFromLocalStorage ? dataFromLocalStorage : initialValues}
+        initialValues={initialValues}
         onSubmit={submitForm}
-        validate={validateFormFields}
+        validationSchema={studentSchema}
       >
         {(props) => {
-
           const { touched, isSubmitting, handleSubmit, errors } = props;
 
           return(
@@ -81,6 +106,18 @@ export const StudentRegistration = () => {
 
                 <span className='text-danger'>{ touched.email && errors.email }</span>
               </div>
+              <div className='form-group'>
+                <label htmlFor='password'>Password</label>
+                <Field type='password' as='input' name='password' placeholder='Password' className={'form-control ' + (touched.password && errors.password ? 'is-invalid' : '')} />
+
+                <span className='text-danger'>{ touched.password && errors.password }</span>
+              </div>
+
+              <div className='form-group'>
+                <label htmlFor='confirmpassword'>Confirm password</label>
+                <Field type='password' as='input' name='confirmpassword' placeholder='Confirm password' className={'form-control ' + (touched.confirmpassword && errors.confirmpassword ? 'is-invalid' : '')} />
+                <span className='text-danger'>{ touched.confirmpassword && errors.confirmpassword }</span>
+              </div>
 
               <div className='form-group'>
                 <label htmlFor='sex'>Sex</label>
@@ -105,7 +142,7 @@ export const StudentRegistration = () => {
                 <span className='text-danger'>{ touched.speciality && errors.speciality }</span>
               </div>
 
-              <button disabled={isSubmitting} type='submit' className='btn btn-primary mb-2'>{dataFromLocalStorage ? 'Update data' : 'Submit'}</button>
+              <button disabled={isSubmitting} type='submit' className='btn btn-primary mb-2'>{initialValues.firstName ? 'Update' : 'Submit'}</button>
             </Form>
           )
         }}
