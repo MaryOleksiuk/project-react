@@ -1,26 +1,22 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { studentActions  } from '../../bus/student/actions';
 import { Formik, Form, Field } from 'formik';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import './styles.scss';
 import * as Yup from 'yup';
-import { useSelector } from 'react-redux';
 
 export const StudentRegistration = () => {
   const initialValues = useSelector((state) => state.student);
   const dispatch = useDispatch();
+  
+  let [formFilled, setFormFilled] = useState(false);
 
-  const submitForm = (values, {setSubmitting}) => {
+  const submitForm = (values) => {
     dispatch(studentActions.setStudent(values));
-
     console.log('Form values', values);
 
-    setTimeout(() => {
-      setSubmitting(false);
-    }, 500);
-
-    alert('Thank you! You\'ve submitted the form');
+    setFormFilled(true);
   };
 
   const studentSchema = Yup.object().shape({
@@ -64,13 +60,16 @@ export const StudentRegistration = () => {
     <section className='form'>
       <h1>Student Registration Form</h1>
 
+      {formFilled &&
+        <h3 className='text-success'>Form is filled! Thank you!</h3>
+      }
+
       <Formik
         initialValues={initialValues}
         onSubmit={submitForm}
         validationSchema={studentSchema}
       >
         {(props) => {
-
           const { touched, isSubmitting, handleSubmit, errors } = props;
 
           return(
@@ -108,7 +107,6 @@ export const StudentRegistration = () => {
 
                 <span className='text-danger'>{ touched.email && errors.email }</span>
               </div>
-
               <div className='form-group'>
                 <label htmlFor='password'>Password</label>
                 <Field type='password' as='input' name='password' placeholder='Password' className={'form-control ' + (touched.password && errors.password ? 'is-invalid' : '')} />
