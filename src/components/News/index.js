@@ -28,7 +28,7 @@ export const News = () => {
 
     (posts.length > 0) ? setLoading(false) : setLoading(true);
 
-  }, [posts, id]);
+  }, [posts, id, setLoading]);
 
   if((data.length === 0) && (isLoading === false)) {
     history.push(book.unknown);

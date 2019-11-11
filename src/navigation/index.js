@@ -1,60 +1,89 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { News } from '../Components/News';
+import { News } from '../components/News';
 import { book } from './book';
-import { Home } from '../Views/Home';
-import { PageNotFound } from '../Components/Page-not-found';
-import { Login } from '../Components/Login';
+import { PageNotFound } from '../components/Page-not-found';
+import { Login } from '../components/Login';
 import { PrivateRoute } from './PrivateRoute';
-import { StudentRegistration } from '../Components/StudentRegistration';
-import { Student } from '../Components/Student';
+import { StudentRegistration } from '../components/StudentRegistration';
+import { Student } from '../components/Student';
+import { People } from '../bus/people';
+import { Person } from '../bus/people/person';
+
+// Layouts
+import * as Views from '../views';
 
 export const Routes = () => (
   <>
     <Switch>
       <Route
-        component={Home}
-        path={book.root}
-        exact
-      />
-
-      <Route
-        component={News}
         path={book.news}
         exact
-        restricted={false}
-      />
+      >
+        <Views.Facade>
+          <News />
+        </Views.Facade>
+      </Route>
 
       <Route
-        component={PageNotFound}
         path={book.unknown}
         exact
-        restricted={false}
-        />
+      >
+        <Views.Facade>
+          <PageNotFound />
+        </Views.Facade>
+      </Route>
 
       <Route
-        component={Login}
         path={book.login}
         exact
-      />
+      >
+        <Views.Facade>
+          <Login />
+        </Views.Facade>
+      </Route>
 
       <Route
-        component={StudentRegistration}
         path={book.studentRegistration}
         exact
-      />
+      >
+        <Views.Facade>
+          <StudentRegistration />
+        </Views.Facade>
+      </Route>
 
       <Route
-        component={Student}
         path={book.student}
-        exact
-      />
+        exact>
+        <Views.Facade>
+          <Student />
+        </Views.Facade>
+      </Route>
 
       <PrivateRoute
         path={book.newsItem}
       >
-        <News />
+        <Views.Facade>
+          <News />
+        </Views.Facade>
       </PrivateRoute>
+
+      <Route
+        path={book.people}
+        exact>
+        <Views.Facade>
+          <People />
+        </Views.Facade>
+      </Route>
+
+      <Route
+        path={book.person}
+        exact
+      >
+        <Views.Facade>
+          <Person />
+        </Views.Facade>
+      </Route>
 
       <Redirect to={book.unknown} />
 

@@ -7,7 +7,7 @@ const initialState = {
 export const domainReducer = ( state = initialState, { type } ) => {
   switch(type) {
     case types.DOMAIN_ACTION:
-      return { ... state, property: '' };
+      return { ...state, property: '' };
 
     default:
       return state;

@@ -10,10 +10,6 @@ export const Header = () => {
     <header className='header'>
       <ul>
         <li>
-          <NavLink to={book.root} exact activeClassName='selected'>Home</NavLink>
-        </li>
-
-        <li>
           <NavLink to={book.news} activeClassName='selected'>News</NavLink>
         </li>
 
@@ -23,6 +19,10 @@ export const Header = () => {
 
         <li>
           <NavLink to={book.student} activeClassName='selected' exact>Student</NavLink>
+        </li>
+
+        <li>
+          <NavLink to={book.people} activeClassName='selected' exact>People</NavLink>
         </li>
       </ul>
     </header>
