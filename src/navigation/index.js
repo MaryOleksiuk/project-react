@@ -9,6 +9,8 @@ import { StudentRegistration } from '../components/StudentRegistration';
 import { Student } from '../components/Student';
 import { People } from '../bus/people';
 import { Person } from '../bus/people/person';
+import { Film } from '../bus/films/film';
+import { Films } from '../bus/films';
 
 // Layouts
 import * as Views from '../views';
@@ -82,6 +84,22 @@ export const Routes = () => (
       >
         <Views.Facade>
           <Person />
+        </Views.Facade>
+      </Route>
+
+      <Route
+        path={book.films}
+        exact>
+        <Views.Facade>
+          <Films />
+        </Views.Facade>
+      </Route>
+
+      <Route
+        path={book.film}
+        exact>
+        <Views.Facade>
+          <Film />
         </Views.Facade>
       </Route>
 

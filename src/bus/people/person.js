@@ -24,8 +24,6 @@ export const Person = () => {
     homeworld
   } = person;
 
-  console.log('person', person);
-
   const personInfo = isFetching || (
     <section>
       <li>Name: { name }</li>
