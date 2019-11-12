@@ -22,7 +22,7 @@ export const People = () => {
 
   return(
     <>
-    <Title>People component</Title>
+    <Title>People</Title>
       { isFetching && <Loader/> }
       { errorMessage }
       { list }
