@@ -1,13 +1,13 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { News } from '../Components/News';
+import { News } from '../components/News';
 import { book } from './book';
 import { Home } from '../Views/Home';
-import { PageNotFound } from '../Components/Page-not-found';
-import { Login } from '../Components/Login';
+import { PageNotFound } from '../components/Page-not-found';
+import { Login } from '../components/Login';
 import { PrivateRoute } from './PrivateRoute';
-import { StudentRegistration } from '../Components/StudentRegistration';
-import { Student } from '../Components/Student';
+import { StudentRegistration } from '../components/StudentRegistration';
+import { Student } from '../components/Student';
 
 export const Routes = () => (
   <>
