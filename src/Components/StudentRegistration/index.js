@@ -8,7 +8,7 @@ export const StudentRegistration = () => {
   let [formFilled, setFormFilled] = useState(false);
 
   const initialValues = {
-    firstName: '',
+    firstname: '',
     surname: '',
     age: '',
     email: '',
@@ -31,7 +31,7 @@ export const StudentRegistration = () => {
   };
 
   const studentSchema = Yup.object().shape({
-    firstName: Yup.string()
+    firstname: Yup.string()
       .required('Required'),
     surname: Yup.string()
       .required('Required'),
@@ -72,7 +72,7 @@ export const StudentRegistration = () => {
       <h1>Student Registration Form</h1>
 
       {formFilled &&
-        <h3 className='text-success'>Form is filled! Thank you!</h3>
+        <h3 data-testid='successTitle' className='text-success'>Form is filled! Thank you!</h3>
       }
 
       <Formik
@@ -80,6 +80,7 @@ export const StudentRegistration = () => {
         onSubmit={submitForm}
         validationSchema={studentSchema}
         data-testid='form'
+        class='test'
       >
         {(props) => {
 
@@ -88,10 +89,10 @@ export const StudentRegistration = () => {
           return(
             <Form onSubmit={handleSubmit} data-testid='studentForm'>
               <div className='form-group'>
-                <label htmlFor='firstName'>First name</label>
-                <Field data-testid='firstname' type='text' as='input' name='firstName' placeholder='First name' className={'form-control ' + (touched.firstName && errors.firstName ? 'is-invalid' : '')} />
+                <label htmlFor='firstname'>First name</label>
+                <Field data-testid='firstname' type='text' as='input' name='firstname' placeholder='First name' className={'form-control ' + (touched.firstname && errors.firstname ? 'is-invalid' : '')} />
 
-                <span data-testid='firstNameError' className='text-danger'>{ touched.firstName && errors.firstName }</span>
+                <span data-testid='firstNameError' className='text-danger'>{ touched.firstname && errors.firstname }</span>
               </div>
 
               <div className='form-group'>
@@ -131,9 +132,9 @@ export const StudentRegistration = () => {
 
               <div className='form-group'>
                 <label htmlFor='confirmpassword'>Confirm password</label>
-                <Field type='password' as='input' name='confirmpassword' placeholder='Confirm password' className={'form-control ' + (touched.confirmpassword && errors.confirmpassword ? 'is-invalid' : '')} />
+                <Field data-testid='confirmPassword' type='password' as='input' name='confirmpassword' placeholder='Confirm password' className={'form-control ' + (touched.confirmpassword && errors.confirmpassword ? 'is-invalid' : '')} />
 
-                <span className='text-danger'>{ touched.confirmpassword && errors.confirmpassword }</span>
+                <span data-testid='confirmPasswordError' className='text-danger'>{ touched.confirmpassword && errors.confirmpassword }</span>
               </div>
 
               <div className='form-group'>

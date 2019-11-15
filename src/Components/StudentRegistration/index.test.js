@@ -16,6 +16,17 @@ const init = () => {
 };
 
 describe('Student Registration component', () => {
+  const initialValues = {
+    firstname: '',
+    surname: '',
+    age: '',
+    email: '',
+    sex: '',
+    speciality: '',
+    password: '',
+    confirmpassword: ''
+  };
+
   it('Form should render without errors', () => {
     const { getByTestId } = init();
     const form = getByTestId('studentForm');
@@ -32,7 +43,7 @@ describe('Student Registration component', () => {
 
   it( 'setLocalStorage mock fn', () => {
     const testValues = {
-      firstName: 'f',
+      firstname: 'f',
       surname: 'f',
       age: '3',
       email: 'f',
@@ -46,22 +57,6 @@ describe('Student Registration component', () => {
     localStorage.setItem( 'student', JSON.stringify(testValues) );
     expect(localStorage.setItem).toHaveBeenCalledTimes( 1 );
   } );
-
-
-  // it('New data should be added to localstorage', async() => {
-  //   const { container, getByTestId } = init();
-  //   const submitButton = getByTestId('submitButton');
-  //
-  //   const fakeAddToLocalStorage = jest.spyOn(StudentRegistration.prototype, 'addToLocalStorage');
-  //
-  //   const wrapper = shallow(<StudentRegistration/>);
-  //
-  //   await act(async() => {
-  //     await fireEvent.submit(submitButton);
-  //   });
-  //   wrapper.update();
-  //   expect(fakeAddToLocalStorage).toHaveBeenCalled();
-  // });
 
   describe('Student Registration Validation on blur', () => {
     it('Should show First Name validation on blur', async() => {
@@ -108,6 +103,17 @@ describe('Student Registration component', () => {
 
       expect(getByTestId('passwordError')).not.toBeNull();
       expect(getByTestId("passwordError").textContent).toBe("Password must contain at least 10 characters");
+    });
+
+    it('Should show Confirm password validation on blur', async() => {
+      const { getByTestId } = init();
+      const input = getByTestId('confirmPassword');
+
+      await act(async() => {
+        await fireEvent.blur(input);
+      });
+
+      expect(getByTestId('confirmPasswordError')).not.toBeNull();
     });
 
     it('Should show Sex validation on blur', async() => {
