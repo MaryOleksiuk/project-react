@@ -3,9 +3,12 @@ import { Formik, Form, Field } from 'formik';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import './styles.scss';
 import * as Yup from 'yup';
+import {useLocalStorage} from "./useLocalStorage";
 
 export const StudentRegistration = () => {
   let [formFilled, setFormFilled] = useState(false);
+
+  const { dataFromLocalStorage, addToLocalStorage } = useLocalStorage();
 
   const initialValues = {
     firstname: '',
@@ -17,12 +20,6 @@ export const StudentRegistration = () => {
     password: '',
     confirmpassword: ''
   };
-
-  const addToLocalStorage = (data) => {
-    localStorage.setItem('student', JSON.stringify(data));
-  };
-
-  const dataFromLocalStorage = !(localStorage.getItem('student') === null) ? JSON.parse(localStorage.getItem('student')) : false;
 
   const submitForm = (values) => {
     addToLocalStorage(values);
@@ -87,7 +84,7 @@ export const StudentRegistration = () => {
           const { touched, isSubmitting, handleSubmit, errors } = props;
 
           return(
-            <Form onSubmit={handleSubmit} data-testid='studentForm'>
+            <Form onSubmit={handleSubmit} data-testid='studentForm' className='form'>
               <div className='form-group'>
                 <label htmlFor='firstname'>First name</label>
                 <Field data-testid='firstname' type='text' as='input' name='firstname' placeholder='First name' className={'form-control ' + (touched.firstname && errors.firstname ? 'is-invalid' : '')} />
