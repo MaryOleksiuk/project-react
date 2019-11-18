@@ -36,7 +36,7 @@ export const useNews = () => {
       isLocalStorageRequest ? setPosts(JSON.parse(response)) : getPosts();
       setLoading(false);
     }
-  }, []);
+  }, [posts]);
 
   return { isLoading, posts, setLoading }
 };

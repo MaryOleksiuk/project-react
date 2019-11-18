@@ -5,5 +5,7 @@ export const book = Object.freeze({
   unknown: '/page-not-found',
   login: '/login',
   studentRegistration: '/student/registration',
-  student: '/student'
+  student: '/student',
+  people: '/people',
+  person: '/people/:id'
 });
