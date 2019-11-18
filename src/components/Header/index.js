@@ -24,6 +24,10 @@ export const Header = () => {
         <li>
           <NavLink to={book.people} activeClassName='selected' exact>People</NavLink>
         </li>
+
+        <li>
+          <NavLink to={book.films} activeClassName='selected' exact>Films</NavLink>
+        </li>
       </ul>
     </header>
   )

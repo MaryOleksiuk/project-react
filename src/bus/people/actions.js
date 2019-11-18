@@ -1,5 +1,5 @@
 import { types } from './types';
-import { api } from "../../api";
+import { api } from '../../api';
 
 export const peopleActions = Object.freeze({
   startFetching: () => {
