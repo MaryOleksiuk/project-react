@@ -38,14 +38,18 @@
       "last 1 safari version"
     ]
   },
+  "devDependencies": {
+    "@testing-library/dom": "latest",
+    "@testing-library/react-hooks": "^3.2.1",
+    "enzyme": "latest",
+    "enzyme-adapter-react-16": "latest",
+    "jest": "^24.9.0",
+    "jest-mock": "latest",
+    "sinon": "^7.5.0"
+  },
   "jest": {
     "collectCoverageFrom": [
       "./src/components/StudentRegistration/index.js"
     ]
-  },
-  "devDependencies": {
-    "@testing-library/react-hooks": "^3.2.1",
-    "enzyme": "latest",
-    "enzyme-adapter-react-16": "latest"
   }
 }

@@ -157,6 +157,8 @@ export const StudentRegistration = () => {
                 <span data-testid='specialityError' className='text-danger'>{ touched.speciality && errors.speciality }</span>
               </div>
 
+              {isSubmitting && <div id="submitting">Submitting</div>}
+
               <button data-testid='submitButton' disabled={isSubmitting} type='submit' className='btn btn-primary mb-2'>{dataFromLocalStorage ? 'Update data' : 'Submit'}</button>
             </Form>
           )
