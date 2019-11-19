@@ -49,7 +49,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "./src/components/StudentRegistration/index.js"
+      "./src/components/Student/index.js"
     ]
   }
 }
