@@ -1,11 +1,9 @@
 import React from 'react';
 import './styles.scss';
-import { book } from '../../navigation/book';
-import { NavLink } from 'react-router-dom';
 
 export const Student = () => {
   const studentData = JSON.parse(localStorage.getItem('student'));
-  const studentIsNotCreated = (<p>Student hasn't been created, you can create a student using <NavLink to={book.studentRegistration} exact activeClassName='selected'>this link.</NavLink></p>);
+  const studentIsNotCreated = (<p data-testid='createStudentTitle'>Student hasn't been created, you can create a student using <a href='/student/registration' >this link.</a></p>);
 
   let studentDataList = [];
 
@@ -17,7 +15,7 @@ export const Student = () => {
 
   return (
     <section className='student'>
-      <h1>Student</h1>
+      <h1 data-testid='componentTitle'>Student</h1>
 
       <ul>
         { (typeof studentDataList !== 'undefined' && studentDataList.length > 0) ? studentDataList : studentIsNotCreated }
