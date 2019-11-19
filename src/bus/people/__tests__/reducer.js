@@ -30,10 +30,6 @@ describe('People reducer', () => {
     expect(peopleReducer(void 0, peopleActions.fetchAsync())).toMatchSnapshot();
   });
 
-  it('should handle fetch async action', () => {
-    expect(peopleReducer(void 0, peopleActions.fetchAsync())).toMatchSnapshot();
-  });
-
   it('should handle fetch async person action', () => {
     expect(peopleReducer(void 0, peopleActions.fetchAsyncPerson())).toMatchSnapshot();
   });

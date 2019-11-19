@@ -30,10 +30,6 @@ describe('Films reducer', () => {
     expect(filmsReducer(void 0, filmsActions.fetchAsync())).toMatchSnapshot();
   });
 
-  it('should handle fetch async action', () => {
-    expect(filmsReducer(void 0, filmsActions.fetchAsync())).toMatchSnapshot();
-  });
-
   it('should handle fetch async films action', () => {
     expect(filmsReducer(void 0, filmsActions.fetchAsyncFilm())).toMatchSnapshot();
   });
