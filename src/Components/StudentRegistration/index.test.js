@@ -1,10 +1,6 @@
 import React from "react";
-import {render, fireEvent, act, cleanup} from '@testing-library/react';
-import Enzyme, { mount, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render, fireEvent, act, cleanup } from '@testing-library/react';
 import { StudentRegistration } from './index';
-
-Enzyme.configure({ adapter: new Adapter()});
 
 const init = () => {
   const { container, getByTestId } = render(<StudentRegistration />);
@@ -16,7 +12,7 @@ const init = () => {
 };
 
 describe('Student Registration component', () => {
-  afterEach(cleanup);
+  afterEach(() => cleanup());
 
   const initialValues = {
     firstname: '',
@@ -28,8 +24,6 @@ describe('Student Registration component', () => {
     password: '',
     confirmpassword: ''
   };
-
-  afterEach(() => cleanup());
 
   it('Form should render without errors', () => {
      const { getByTestId } = init();
@@ -65,70 +59,18 @@ describe('Student Registration component', () => {
     localStorage.clear();
   });
 
-  it("submits", () => {
-    const handleSubmit = jest.fn();
-    const { getByTestId } = render(<StudentRegistration handleSubmit={handleSubmit} />);
-    fireEvent.submit(getByTestId("form"));
-    expect(handleSubmit).toHaveBeenCalled();
+  it('Onsubmit should be called', async() => {
+    const { getByTestId } = init();
+    const formNode = getByTestId('studentForm');
+
+    formNode.onsubmit = jest.fn();
+
+    await act(async() => {
+      await fireEvent.submit(formNode);
+    });
+
+    expect(formNode.onsubmit).toHaveBeenCalled();
   });
-
-
-  // //------------------NOT WORKING----------------------
-  // it('Onsubmit should be called', async() => {
-  //   const { getByTestId, container } = init();
-  //   const formNode = getByTestId('studentForm');
-  //   const submitButton = getByTestId('submitButton');
-  //
-  //   formNode.onSubmit = jest.fn();
-  //
-  //   await act(async() => {
-  //     await fireEvent.submit(submitButton);
-  //   });
-  //
-  //   expect(formNode.onSubmit).toHaveBeenCalled();
-  // });
-
-  // it('setFormFilled sets the open formFilled state properly', async() => {
-  // //   const wrapper = mount(<StudentRegistration/>);
-  // //   expect(wrapper.state('formFilled')).toBeFalsy();
-  // //   wrapper.instance().onSubmit(true);
-  // //
-  // //   expect(wrapper.state('formFilled')).toBeTruthy();
-  // //   expect(wrapper.find('.success-title').length).toBeGreaterThan(1);
-  // //
-  // //
-  //   // TO CHECK IF SUCCESS TITLE IS ON THE PAGE AFTER SUBMIT
-  //   const tree = shallow(<StudentRegistration />);
-  //   const submitButton = tree.find('Formik').dive().find('button');
-  //   expect(tree.find('Formik').dive().find('#submitting')).toHaveLength(0);
-  //
-  //   tree.find('Formik').dive().find('Form').simulate('submit', {
-  //      preventDefault: () => {} // no op
-  //    });
-  //   // expect(tree.find('Formik').dive().find('.text-success')).toBe('Form is filled! Thank you!');
-  //   expect(tree.find('Formik').dive().find('button[type="submit"]').props().disabled).toBe(true);
-  // });
-
-  //--------------------------------------------------------
-  // EXAMPLE FROM DOCS - NOT WORKING
-  //  it('submits the form', () => {
-  //    const tree = shallow(<StudentRegistration />);
-  //    expect(tree.find('Formik').dive().find('#submitting')).toHaveLength(0);
-  //
-  //    // simulate submit event. this is always sync! async calls to setState are swallowed.
-  //    // be careful of false positives
-  //    tree.find('Formik').dive().find(Form).simulate('submit', {
-  //      preventDefault: () => {} // no op
-  //    });
-  //
-  //    // Because the simulated event is 100% sync, we can use it to test the synchronous changes
-  //    // here. Any async stuff you do inside handleSubmit will be swallowed. Thus our UI
-  //    // will see the following changes:
-  //    // - isSubmitting -> true (even if you set it to false asynchronously in your handleSubmit)
-  //    // - touched: all fields
-  //    expect(tree.find('Formik').dive().find('#submitting')).toHaveLength(1);
-  //    // expect(tree.find('Formik').dive().find('button[type="submit"]').props().disabled).toBe(true);
-  //  });
 
   describe('Student Registration Validation on blur', () => {
     it('Should show First Name validation on blur', async() => {
