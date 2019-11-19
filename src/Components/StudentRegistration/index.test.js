@@ -1,10 +1,9 @@
-import React from "react";
+import React from 'react';
 import { render, fireEvent, act, cleanup } from '@testing-library/react';
 import { StudentRegistration } from './index';
 
 const init = () => {
   const { container, getByTestId } = render(<StudentRegistration />);
-
   return {
     container,
     getByTestId
@@ -35,7 +34,6 @@ describe('Student Registration component', () => {
   it('Form should have submit button', () => {
     const { getByTestId } = init();
     const submitButton = getByTestId('submitButton');
-
     expect(submitButton).toBeTruthy();
   });
 
@@ -52,7 +50,8 @@ describe('Student Registration component', () => {
     };
 
     jest.spyOn(localStorage.__proto__, 'setItem');
-    localStorage.setItem( 'student', JSON.stringify(testValues) );
+    localStorage.setItem('student', JSON.stringify(testValues));
+
     expect(localStorage.setItem).toHaveBeenCalledTimes( 1 );
     expect(localStorage.setItem).toHaveBeenCalledWith( 'student', JSON.stringify(testValues));
 
@@ -82,6 +81,7 @@ describe('Student Registration component', () => {
       });
 
       expect(getByTestId('firstNameError')).not.toBeNull();
+      expect(getByTestId('firstNameError').textContent).toBe('Required');
     });
 
     it('Should show Surname validation on blur', async() => {
@@ -93,6 +93,7 @@ describe('Student Registration component', () => {
       });
 
       expect(getByTestId('surnameError')).not.toBeNull();
+      expect(getByTestId('surnameError').textContent).toBe('Required');
     });
 
     it('Should show Email validation on blur', async() => {
@@ -104,7 +105,7 @@ describe('Student Registration component', () => {
       });
 
       expect(getByTestId('emailError')).not.toBeNull();
-      expect(getByTestId("emailError").textContent).toBe("Required");
+      expect(getByTestId('emailError').textContent).toBe('Required');
     });
 
     it('Should show Password validation on blur', async() => {
@@ -116,7 +117,7 @@ describe('Student Registration component', () => {
       });
 
       expect(getByTestId('passwordError')).not.toBeNull();
-      expect(getByTestId("passwordError").textContent).toBe("Required");
+      expect(getByTestId('passwordError').textContent).toBe('Required');
     });
 
     it('Should show Confirm password validation on blur', async() => {
@@ -139,7 +140,7 @@ describe('Student Registration component', () => {
       });
 
       expect(getByTestId('sexError')).not.toBeNull();
-      expect(getByTestId("sexError").textContent).toBe("Required");
+      expect(getByTestId('sexError').textContent).toBe('Required');
     });
 
     it('Should show Speciality validation on blur', async() => {
@@ -151,7 +152,7 @@ describe('Student Registration component', () => {
       });
 
       expect(getByTestId('specialityError')).not.toBeNull();
-      expect(getByTestId("specialityError").textContent).toBe("Required");
+      expect(getByTestId('specialityError').textContent).toBe('Required');
     });
   });
 });
